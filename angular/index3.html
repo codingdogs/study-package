@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <title>angular-ninghao</title>
+
+    </head>
+    <body ng-app='app' ng-controller='con3'>
+        <div ng-controller='con1'>{{two}}</div>
+        {{name}}
+        <script src="bower_components/angular/angular.min.js" charset="utf-8"></script>
+        <script type="text/javascript">
+            var app1 = angular.module('one', []).controller('con1',function($scope) {
+                $scope.name = 'one-name';
+
+
+            })
+            var app2 = angular.module('two', []).controller('con1',function($scope) {
+                $scope.name = 'two-name'
+                $scope.two='two'
+
+            })
+
+            var app3 = angular.module('app', ['one','two']).controller('con3',function($scope,$timeout){
+                $scope.name='three';
+                var set=$timeout(function(){
+                    alert(1)
+                },2000)
+            })
+
+        </script>
+    </body>
+</html>
