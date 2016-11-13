@@ -12,27 +12,16 @@
         }
     </style>
 </head>
-<body>
+<body ng-app>
 
-    <div ng-controller='app'>
-        {{name}}
-    </div>
-
+  <ul ng-init='json={a:1,b:"abc",c:4}'>
+    <li ng-repeat='(index,value) in json'>
+      {{index}}-{{value}}
+    </li>
+  </ul>
     <script src="bower_components/angular/angular.min.js" charset="utf-8"></script>
     <script type="text/javascript">
-        // var myApp=angular.module('myApp',[]);
-        // myApp.controller('showController',function($scope){
-        //     $scope.shows=[
-        //         {title:'one',subscribe:true},
-        //         {title:'two',subscribe:false},
-        //         {title:'three',subscribe:true},
-        //         {title:'four',subscribe:false},
-        //         {title:'five',subscribe:true}
-        //     ]
-        // })
-        function app($scope){
-            $scope.name='one';
-        }
+
     </script>
 </body>
 </html>
