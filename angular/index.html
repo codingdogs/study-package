@@ -1,27 +1,54 @@
 <!DOCTYPE html>
 <html lang="">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <title>angular-ninghao</title>
-    <style>
-        .green{
-            color: green;
-        }
-    </style>
-</head>
-<body ng-app>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <title>angular-ninghao</title>
+        <style media="screen">
+            li{
+                padding:none;
+                margin:0;
+                list-style: none;
+            }
+            input.active{
+                background-color: red;
+            }
+        </style>
+    </head>
+    <body ng-app='app' ng-controller='con1'>
+        <div class="inputs">
+            <input type="button" ng-repeat='v in data.data' value="{{$index}}" ng-class='show==$index?"active":""' ng-click="click($index)">
+        </div>
+        <ul>
+            <li ng-repeat='v in data.data' ng-if='show==$index'>
+                <img src="{{v.cover_img}}" alt="">
+            </li>
+        </ul>
+        <script src="bower_components/angular/angular.min.js" charset="utf-8"></script>
+        <script type="text/javascript">
+            var app = angular.module('app', []);
+            app.controller('con1', function($scope, $http) {
+                $scope.show=0;
+                $scope.click=function(n){
+                    $scope.show=n;
+                };
+                $http.get('http://m.jiajuol.com/api/subject/subject_list.php', {
+                    params: {
+                        page: 1,
+                        limit: 10,
+                        house_type: 0,
+                        house_style: 0,
+                        house_area: 6
+                    }
+                }).success(function(data){
+                    console.log(data);
+                    $scope.data=data;
+                }).error(function(){
 
-  <ul ng-init='json={a:1,b:"abc",c:4}'>
-    <li ng-repeat='(index,value) in json'>
-      {{index}}-{{value}}
-    </li>
-  </ul>
-    <script src="bower_components/angular/angular.min.js" charset="utf-8"></script>
-    <script type="text/javascript">
-
-    </script>
-</body>
+                })
+            });
+        </script>
+    </body>
 </html>
