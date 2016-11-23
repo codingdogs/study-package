@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+    <head>
+        <meta charset="utf-8">
+        <script src="bower_components/angular/angular.min.js" charset="utf-8"></script>
+        <script type="text/javascript">
+            var app=angular.module('app',[]);
+            app.controller('con',function($scope,$http){
+                $scope.arr=[];
+                $scope.str='';
+                $scope.$watch('str',function(){
+                    $http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',{
+                        params:{
+                            wd:$scope.str,
+                            cb:'JSON_CALLBACK'
+                        }
+                    }).success(function(data){
+                        $scope.arr=data.s;
+                    })
+                })
+            });
+        </script>
+        <title></title>
+    </head>
+    <body>
+        <div ng-controller='con'>
+            <input type="text" name="name" ng-model='str'>
+            <span>{{str}}</span>
+            <ul>
+                <li ng-repeat='x in arr'>{{x}}</li>
+            </ul>
+        </div>
+    </body>
+</html>
